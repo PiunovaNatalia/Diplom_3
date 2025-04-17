@@ -6,7 +6,6 @@ from selenium.webdriver.chrome.service import Service
 
 import pytest
 from data import Data, Urls
-from locators import Locators
 
 
 def get_driver():

@@ -9,18 +9,21 @@ class FeedPage(BasePage):
     ORDER_FEED_TITLE = (By.XPATH, ".//h1[text()='Лента заказов']")
     ORDER_MODAL_WINDOW = (By.XPATH, ".//div[contains(@class,'Modal_orderBox')]")
     DETAILS = (By.XPATH, ".//p[text()='Cостав']")
-    # MODAL_OVERLAY = (By.XPATH, ".//div[contains(@class,'Modal_modal_overlay')]")
     MODAL_OPENED = (By.XPATH, ".//div[contains(@class,'Modal_modal_opened')]")
-    # ORDERS_P = (By.XPATH, ".//p[contains(@class,'text_type_digits-default')]")  # li[contains(@class,'OrderHistory_listItem')]/
     ORDERS_P = (By.XPATH, ".//div[contains(@class,'OrderHistory_textBox')]/p[contains(@class,'text_type_digits-default')]")
     ORDERS_HISTORY = (By.XPATH, ".//div[contains(@class,'OrderHistory_orderHistory')]")
 
-    ORDERS_HISTORY_LIST = (By.XPATH, ".//ul[contains(@class,'OrderHistory_list')]/li")
+    ORDER_HISTORY_LIST = (By.XPATH, f".//div[contains(@class,'OrderHistory_orderHistory')]")
+    ORDER_HISTORY_LIST_ITEM = (By.XPATH, f".//ul[contains(@class,'OrderHistory_profileList')]/li/a/div/p[contains(@class,'text_type_digits')]")
 
+    ORDER_FEED_LIST = (By.XPATH, f".//ul[contains(@class,'OrderFeed_list')]")
+    ORDER_FEED_LIST_ITEM = (By.XPATH, f".//li[contains(@class,'OrderHistory_listItem')]/a/div/p[contains(@class,'text_type_digits')]")
 
     COMPLETED_ALL_TIME = (By.XPATH, "(.//p[contains(@class,'OrderFeed_number')])[1]")
     COMPLETED_TODAY = (By.XPATH, "(.//p[contains(@class,'OrderFeed_number')])[2]")
 
+    ORDER_NUMBER = (By.XPATH, ".//h2[contains(@class,'Modal_modal__title')]")
+    ORDERS_IN_PROGRESS = (By.XPATH, ".//ul[contains(@class,'OrderFeed_orderListReady')]/li[contains(@class,'text_type_digits')]")
 
     def make_order(self):
         drag_and_drop = self.drag_and_drop(self.INGREDIENT_1, self.CONSTRUCTOR_BASKET)
@@ -30,16 +33,15 @@ class FeedPage(BasePage):
         create_order_button.click()
 
         self.wait_for_visibility_of_element(self.MODAL_WINDOW)
-
-        # status = self.get_element(self.ORDER_STATUS)
         self.wait_for_invisibility_of_element(self.MODAL_OPENED)
 
-        self.wait_for_visibility_of_element(self.CLOSE_BUTTON)
+        order_number = self.get_element(self.ORDER_NUMBER).text
 
+        self.wait_for_visibility_of_element(self.CLOSE_BUTTON)
         close_button = self.get_element(self.CLOSE_BUTTON)
         close_button.click()
 
-        # self.wait_for_invisibility_of_element(self.MODAL_OPENED)
+        return order_number
 
     def get_order_number(self):
         return self.get_element(self.MODAL_TITLE).text

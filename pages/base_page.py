@@ -25,16 +25,8 @@ class BasePage:
     CREATE_ORDER_BUTTON = (By.XPATH, ".//button[text()='Оформить заказ']")
     PROFILE_BUTTON = (By.XPATH, ".//p[text()='Личный Кабинет']")  #  Кнопка личный кабинет в шапке сайта
     ORDER_HISTORY_BUTTON = (By.XPATH, ".//a[text()='История заказов']")
-
-    # INGREDIENT_DETAIL = (By.XPATH, ".//h2[contains(@class,'Modal_modal__title')]")
-    # CLOSE_BUTTON = (By.XPATH, ".//button[contains(@class,'Modal_modal__close')]")
-    #
     ORDER_STATUS = (By.XPATH, "(.//div[contains(@class,'Modal_modal__textContainer')]/p)[1]")
-
     MODAL_TITLE = (By.XPATH, ".//h2[contains(@class,'Modal_modal__title')]")
-
-
-
 
     def __init__(self, driver):
         self.driver = driver
@@ -46,6 +38,11 @@ class BasePage:
     @allure.step('Ожидаем отображения элемента на странице')
     def wait_for_visibility_of_element(self, xpath):
         WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(xpath))
+
+    def text_to_be_present_in_element(self, xpath, text):
+        WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element(xpath, text))
+
+
 
     @allure.step('Ожидаем скрытия элемента на странице')
     def wait_for_invisibility_of_element(self, xpath):
@@ -66,6 +63,10 @@ class BasePage:
     @allure.step('Ищем элемент на странице')
     def get_element(self, xpath):
         return self.driver.find_element(*xpath)
+
+    @allure.step('Ищем элементы на странице')
+    def get_elements(self, xpath):
+        return self.driver.find_elements(*xpath)
 
     @allure.step('Кликаем по кнопке')
     def click(self, xpath):
