@@ -1,8 +1,10 @@
 from data import Urls
 from pages.feed_page import FeedPage
+import allure
 
 
 class TestFeed:
+    @allure.title("Тестирование открытия окна с дополнительной информацией о заказе")
     def test_feed_open_order_details(self, driver_main_page):
         page = FeedPage(driver_main_page)
         page.login_from_main_page()
@@ -19,6 +21,7 @@ class TestFeed:
 
         assert order_modal_window.is_displayed()
 
+    @allure.title("Тестирование увеличения общего числа заказов после совершения заказа")
     def test_feed_order_all_amount_increased(self, driver_main_page):
         page = FeedPage(driver_main_page)
         page.login_from_main_page()
@@ -33,6 +36,7 @@ class TestFeed:
 
         assert all_time_before_order < all_time_after_order
 
+    @allure.title("Тестирование увеличения числа заказов за сегодня после совершения заказа")
     def test_feed_order_today_amount_increased(self, driver_main_page):
         page = FeedPage(driver_main_page)
         page.login_from_main_page()
@@ -47,6 +51,7 @@ class TestFeed:
 
         assert today_before_order < today_after_order
 
+    @allure.title("Тестирование появления заказа в разделе 'В работе' после совершения заказа")
     def test_feed_order_appeared_in_progress(self, driver_main_page):
         page = FeedPage(driver_main_page)
         page.login_from_main_page()
@@ -58,6 +63,7 @@ class TestFeed:
 
         assert order_number == orders_in_progress.text[1:]
 
+    @allure.title("Тестирование отображения нового заказа в истории заказов и в ленте заказов")
     def test_feed_order_exist_on_history_page_and_feed_page(self, driver_main_page):
         page = FeedPage(driver_main_page)
         page.login_from_main_page()

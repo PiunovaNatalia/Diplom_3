@@ -3,7 +3,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver import ActionChains
 import allure
-
 from data import Data
 
 
@@ -39,10 +38,8 @@ class BasePage:
     def wait_for_visibility_of_element(self, xpath):
         WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(xpath))
 
-    def text_to_be_present_in_element(self, xpath, text):
-        WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element(xpath, text))
-
-
+    # def text_to_be_present_in_element(self, xpath, text):
+    #     WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element(xpath, text))
 
     @allure.step('Ожидаем скрытия элемента на странице')
     def wait_for_invisibility_of_element(self, xpath):
@@ -108,6 +105,6 @@ class BasePage:
 
         return ActionChains(self.driver).drag_and_drop(drag, drop)
 
-    @allure.step('Прокручиваем страницу вниз')
-    def page_scroll_down(self):
-        self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
+    # @allure.step('Прокручиваем страницу вниз')
+    # def page_scroll_down(self):
+    #     self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")

@@ -1,8 +1,10 @@
 from data import Data, Urls
 from pages.forgot_password_page import ForgotPasswordPage
+import allure
 
 
 class TestForgotPassword:
+    @allure.title("Тестирование восстановления пароля")
     def test_password_recovery(self, driver_main_page):
         page = ForgotPasswordPage(driver_main_page)
         page.open_page(Urls.LOGIN_URL)
