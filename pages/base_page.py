@@ -15,7 +15,9 @@ class BasePage:
     PROFILE_TITLE = (By.XPATH, ".//a[text()='Профиль']")
     CONSTRUCTOR_BUTTON = (By.XPATH, ".//p[text()='Конструктор']")  # Кнопка Конструктор
     CONSTRUCTOR_TITLE = (By.XPATH, ".//h1[text()='Соберите бургер']")  # Заголовок страницы конструктора
-    INGREDIENT_1 = (By.XPATH, "(.//a[contains(@class,'BurgerIngredient')])[1]")
+
+    INGREDIENT_1 = (By.XPATH, ".//a[contains(@class,'BurgerIngredient_ingredient')]")
+
     CONSTRUCTOR_BASKET = (By.XPATH, ".//ul[contains(@class,'BurgerConstructor')]")
     MODAL_WINDOW = (By.XPATH, ".//div[contains(@class,'Modal_modal')]")
     INGREDIENT_DETAIL = (By.XPATH, ".//h2[contains(@class,'Modal_modal__title')]")
@@ -37,9 +39,6 @@ class BasePage:
     @allure.step('Ожидаем отображения элемента на странице')
     def wait_for_visibility_of_element(self, xpath):
         WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(xpath))
-
-    # def text_to_be_present_in_element(self, xpath, text):
-    #     WebDriverWait(self.driver, 10).until(EC.text_to_be_present_in_element(xpath, text))
 
     @allure.step('Ожидаем скрытия элемента на странице')
     def wait_for_invisibility_of_element(self, xpath):
@@ -102,9 +101,5 @@ class BasePage:
     def drag_and_drop(self, drag, drop):
         drag = self.get_wait_element(drag)
         drop = self.get_wait_element(drop)
-
-        return ActionChains(self.driver).drag_and_drop(drag, drop)
-
-    # @allure.step('Прокручиваем страницу вниз')
-    # def page_scroll_down(self):
-    #     self.driver.execute_script("window.scrollTo(0, document.body.scrollHeight)")
+        return ActionChains(self.driver).drag_and_drop(drag, drop).pause(5)
+        # return ActionChains(self.driver).click_and_hold(drag).pause(5).move_to_element(drop).pause(5).release(drop)
