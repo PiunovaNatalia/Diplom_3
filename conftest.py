@@ -1,26 +1,12 @@
-from selenium import webdriver
-from webdriver_manager.firefox import GeckoDriverManager
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.firefox.service import Service
-from selenium.webdriver.chrome.service import Service
-
 import pytest
 from data import Urls
-
-
-class WebdriverFactory:
-    @staticmethod
-    def get_driver(browser_name):
-        if browser_name == "Chrome":
-            driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()))
-            return driver
-        elif browser_name == "Firefox":
-            driver = webdriver.Firefox(service=Service(GeckoDriverManager().install()))
-            return driver
+from helpers import WebdriverFactory
 
 
 @pytest.fixture(scope="function", params=["Chrome"])
 def driver(request):
+    """Главный Webdriver."""
+
     driver = WebdriverFactory.get_driver(request.param)
     driver.maximize_window()
     yield driver
@@ -29,6 +15,7 @@ def driver(request):
 
 @pytest.fixture(scope="function")
 def driver_main_page(driver):
-    driver.get(Urls.MAIN_PAGE_URL)
+    """Дополнительный Webdriver с открытием главной страницы."""
 
-    yield driver
+    driver.get(Urls.MAIN_PAGE_URL)
+    return driver

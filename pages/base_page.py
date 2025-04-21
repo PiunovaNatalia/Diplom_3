@@ -102,4 +102,3 @@ class BasePage:
         drag = self.get_wait_element(drag)
         drop = self.get_wait_element(drop)
         return ActionChains(self.driver).drag_and_drop(drag, drop).pause(5)
-        # return ActionChains(self.driver).click_and_hold(drag).pause(5).move_to_element(drop).pause(5).release(drop)

@@ -1,18 +1,17 @@
 class Urls:
+    """Ссылки на разделы сайта."""
+
     MAIN_PAGE_URL = "https://stellarburgers.nomoreparties.site"
-    REGISTER_URL = "https://stellarburgers.nomoreparties.site/register"
-    LOGIN_URL = "https://stellarburgers.nomoreparties.site/login"
-    FORGOT_PASSWORD_URL = "https://stellarburgers.nomoreparties.site/forgot-password"
-    ORDER_HISTORY_URL = "https://stellarburgers.nomoreparties.site/account/order-history"
-
-
+    REGISTER_URL = f"{MAIN_PAGE_URL}/register"
+    LOGIN_URL = f"{MAIN_PAGE_URL}/login"
+    FORGOT_PASSWORD_URL = f"{MAIN_PAGE_URL}/forgot-password"
+    ORDER_HISTORY_URL = f"{MAIN_PAGE_URL}/account/order-history"
 
 
 class Data:
     """Данные для заполнения тестов."""
 
     WAIT_TIME = 60
-
     TEST_EMAIL = "piunova_15@gmail.com"
     TEST_PASSWORD = "19_09_93"
     TEST_NAME = "Natalia"
@@ -26,7 +25,6 @@ class Data:
     BREAD_TAB_TEXT = "Булки"
     SAUCES_TAB_TEXT = "Соусы"
     FILLING_TAB_TEXT = "Начинки"
-
     INGREDIENT_DETAILS = "Детали ингредиента"
     ORDER_IN_PROGRESS_STATUS = "Ваш заказ начали готовить"
     EXPECTED_NUMBER_OF_INGREDIENTS = 2

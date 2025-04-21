@@ -1,5 +1,6 @@
 from data import Urls
 from pages.feed_page import FeedPage
+from helpers import Helper
 import allure
 
 
@@ -77,22 +78,14 @@ class TestFeed:
         order_history_button.click()
 
         page.wait_for_visibility_of_element(page.ORDER_HISTORY_LIST)
-
-        orders_history_order_numbers = []
-        orders_feed_order_numbers = []
-
         orders_history_list = page.get_elements(page.ORDER_HISTORY_LIST_ITEM)
-
-        for order in orders_history_list:
-            orders_history_order_numbers.append(order.text[2:])
+        orders_history_order_numbers = Helper.make_list_of_order_numbers(orders_history_list)
 
         assert created_order_number in orders_history_order_numbers
 
         page.open_feed_page()
         page.wait_for_visibility_of_element(page.ORDER_FEED_LIST)
         orders_feed_list = page.get_elements(page.ORDER_FEED_LIST_ITEM)
-
-        for order in orders_feed_list:
-            orders_feed_order_numbers.append(order.text[2:])
+        orders_feed_order_numbers = Helper.make_list_of_order_numbers(orders_feed_list)
 
         assert created_order_number in orders_feed_order_numbers
