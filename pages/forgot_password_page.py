@@ -39,11 +39,11 @@ class ForgotPasswordPage(BasePage):
     def click_hide_password_button(self):
         self.click(self.HIDE_PASSWORD_BUTTON)
 
-    @allure.step('Поулчаем активный элемент ввода')
+    @allure.step('Получаем активный элемент ввода')
     def get_active_input(self):
         return self.get_element(self.INPUT_STATUS_ACTIVE)
 
-    @allure.step('Поулчаем кнопку сохранения')
+    @allure.step('Получаем кнопку сохранения')
     def get_save_button(self):
         return self.get_element(self.SAVE_BUTTON)
 
