@@ -4,11 +4,11 @@ class Locators:
     LOGIN_H2 = (By.XPATH, ".//h2[text()='Вход']")
     LOGIN_BUTTON = (By.XPATH, ".//button[text()='Войти']")
     LOGIN_IN_ACCOUNT_BUTTON = (By.XPATH, ".//button[text()='Войти в аккаунт']")
-    EMAIL_INPUT = (By.XPATH, ".//input[@name='name']")  # Поле для ввода имейла
-    PASSWORD_INPUT = (By.XPATH, ".//input[@name='Пароль']")  # Поле для ввода имейла
+    EMAIL_INPUT = (By.XPATH, ".//input[@name='name']")
+    PASSWORD_INPUT = (By.XPATH, ".//input[@type='password']")
     PROFILE_TITLE = (By.XPATH, ".//a[text()='Профиль']")
-    CONSTRUCTOR_BUTTON = (By.XPATH, ".//p[text()='Конструктор']")  # Кнопка Конструктор
-    CONSTRUCTOR_TITLE = (By.XPATH, ".//h1[text()='Соберите бургер']")  # Заголовок страницы конструктора
+    CONSTRUCTOR_BUTTON = (By.XPATH, ".//p[text()='Конструктор']")
+    CONSTRUCTOR_TITLE = (By.XPATH, ".//h1[text()='Соберите бургер']")
     INGREDIENT_1 = (By.XPATH, ".//a[contains(@class,'BurgerIngredient_ingredient')]")
     CONSTRUCTOR_BASKET = (By.XPATH, ".//ul[contains(@class,'BurgerConstructor')]")
     MODAL_WINDOW = (By.XPATH, ".//div[contains(@class,'Modal_modal')]")
@@ -16,7 +16,7 @@ class Locators:
     CLOSE_BUTTON = (By.XPATH, ".//button[contains(@class,'Modal_modal__close')]")
     COUNTER = (By.XPATH, ".//div[contains(@class,'counter_counter')]")
     CREATE_ORDER_BUTTON = (By.XPATH, ".//button[text()='Оформить заказ']")
-    PROFILE_BUTTON = (By.XPATH, ".//p[text()='Личный Кабинет']")  #  Кнопка личный кабинет в шапке сайта
+    PROFILE_BUTTON = (By.XPATH, ".//p[text()='Личный Кабинет']")
     ORDER_HISTORY_BUTTON = (By.XPATH, ".//a[text()='История заказов']")
     ORDER_STATUS = (By.XPATH, "(.//div[contains(@class,'Modal_modal__textContainer')]/p)[1]")
     MODAL_TITLE = (By.XPATH, ".//h2[contains(@class,'Modal_modal__title')]")
@@ -36,11 +36,11 @@ class Locators:
     COMPLETED_TODAY = (By.XPATH, "(.//p[contains(@class,'OrderFeed_number')])[2]")
     ORDER_NUMBER = (By.XPATH, ".//h2[contains(@class,'Modal_modal__title')]")
     ORDERS_IN_PROGRESS = (By.XPATH, ".//ul[contains(@class,'OrderFeed_orderListReady')]/li[contains(@class,'text_type_digits')]")
-    PROFILE_LINK = (By.XPATH, ".//a[text()='Профиль']")  # Кнопка Профиль
+    PROFILE_LINK = (By.XPATH, ".//a[text()='Профиль']")
     FORGOT_PASSWORD_BUTTON = (By.XPATH, ".//a[text()='Восстановить пароль']")
     PASSWORD_RECOVERY_H2 = (By.XPATH, ".//h2[text()='Восстановление пароля']")
     HIDE_PASSWORD_BUTTON = (By.XPATH, ".//div[contains(@class ,'input__icon')]")
     INPUT_STATUS_ACTIVE = (By.XPATH, ".//div[contains(@class ,'input_status_active')]")
     RECOVERY_BUTTON = (By.XPATH, ".//button[text()='Восстановить']")
     SAVE_BUTTON = (By.XPATH, ".//button[text()='Сохранить']")
-    PERSONAL_ACCOUNT_BUTTON = (By.XPATH, ".//p[text()='Личный Кабинет']")  #  Кнопка личный кабинет в шапке сайта
+    PERSONAL_ACCOUNT_BUTTON = (By.XPATH, ".//p[text()='Личный Кабинет']")
