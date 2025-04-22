@@ -1,29 +1,39 @@
-from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 import allure
+from data import Data
+from locators import Locators
 
 
 class FeedPage(BasePage):
-    FEED_BUTTON = (By.XPATH, ".//p[text()='Лента Заказов']")
-    ORDER_ITEM = (By.XPATH, "(.//li[contains(@class,'OrderHistory_listItem')])[1]")
-    ORDER_FEED_TITLE = (By.XPATH, ".//h1[text()='Лента заказов']")
-    ORDER_MODAL_WINDOW = (By.XPATH, ".//div[contains(@class,'Modal_orderBox')]")
-    DETAILS = (By.XPATH, ".//p[text()='Cостав']")
-    MODAL_OPENED = (By.XPATH, ".//div[contains(@class,'Modal_modal_opened')]")
-    ORDERS_P = (By.XPATH, ".//div[contains(@class,'OrderHistory_textBox')]/p[contains(@class,'text_type_digits-default')]")
-    ORDERS_HISTORY = (By.XPATH, ".//div[contains(@class,'OrderHistory_orderHistory')]")
+    FEED_BUTTON = Locators.FEED_BUTTON
+    ORDER_ITEM = Locators.ORDER_ITEM
+    ORDER_FEED_TITLE = Locators.ORDER_FEED_TITLE
+    ORDER_MODAL_WINDOW = Locators.ORDER_MODAL_WINDOW
+    MODAL_OPENED = Locators.MODAL_OPENED
+    ORDER_HISTORY_LIST = Locators.ORDER_HISTORY_LIST
+    ORDER_HISTORY_LIST_ITEM = Locators.ORDER_HISTORY_LIST_ITEM
+    ORDER_FEED_LIST = Locators.ORDER_FEED_LIST
+    ORDER_FEED_LIST_ITEM = Locators.ORDER_FEED_LIST_ITEM
+    COMPLETED_ALL_TIME = Locators.COMPLETED_ALL_TIME
+    COMPLETED_TODAY = Locators.COMPLETED_TODAY
+    ORDER_NUMBER = Locators.ORDER_NUMBER
+    ORDERS_IN_PROGRESS = Locators.ORDERS_IN_PROGRESS
+    INGREDIENT_1 = Locators.INGREDIENT_1
+    CONSTRUCTOR_BASKET = Locators.CONSTRUCTOR_BASKET
+    MODAL_WINDOW = Locators.MODAL_WINDOW
+    CLOSE_BUTTON = Locators.CLOSE_BUTTON
+    CREATE_ORDER_BUTTON = Locators.CREATE_ORDER_BUTTON
+    MODAL_TITLE = Locators.MODAL_TITLE
+    LOGIN_IN_ACCOUNT_BUTTON = Locators.LOGIN_IN_ACCOUNT_BUTTON
+    PROFILE_BUTTON = Locators.PROFILE_BUTTON
+    PROFILE_TITLE = Locators.PROFILE_TITLE
+    ORDER_HISTORY_BUTTON = Locators.ORDER_HISTORY_BUTTON
+    LOGIN_H2 = Locators.LOGIN_H2
+    PASSWORD_INPUT = Locators.PASSWORD_INPUT
+    EMAIL_INPUT = Locators.EMAIL_INPUT
+    LOGIN_BUTTON = Locators.LOGIN_BUTTON
+    CONSTRUCTOR_TITLE = Locators.CONSTRUCTOR_TITLE
 
-    ORDER_HISTORY_LIST = (By.XPATH, f".//div[contains(@class,'OrderHistory_orderHistory')]")
-    ORDER_HISTORY_LIST_ITEM = (By.XPATH, f".//ul[contains(@class,'OrderHistory_profileList')]/li/a/div/p[contains(@class,'text_type_digits')]")
-
-    ORDER_FEED_LIST = (By.XPATH, f".//ul[contains(@class,'OrderFeed_list')]")
-    ORDER_FEED_LIST_ITEM = (By.XPATH, f".//li[contains(@class,'OrderHistory_listItem')]/a/div/p[contains(@class,'text_type_digits')]")
-
-    COMPLETED_ALL_TIME = (By.XPATH, "(.//p[contains(@class,'OrderFeed_number')])[1]")
-    COMPLETED_TODAY = (By.XPATH, "(.//p[contains(@class,'OrderFeed_number')])[2]")
-
-    ORDER_NUMBER = (By.XPATH, ".//h2[contains(@class,'Modal_modal__title')]")
-    ORDERS_IN_PROGRESS = (By.XPATH, ".//ul[contains(@class,'OrderFeed_orderListReady')]/li[contains(@class,'text_type_digits')]")
 
     @allure.step("Совершение заказа")
     def make_order(self):
@@ -62,36 +72,71 @@ class FeedPage(BasePage):
         create_order_button.click()
         self.wait_for_visibility_of_element(self.ORDER_FEED_TITLE)
 
+    @allure.step('Открываем ленту заказов')
     def click_order_feed_button(self):
         self.click(self.FEED_BUTTON)
 
+    @allure.step('Ожидаем открытия ленты заказов')
     def wait_for_visibility_of_order_feed_title(self):
         self.wait_for_visibility_of_element(self.ORDER_FEED_TITLE)
 
+    @allure.step('Нажимаем на элемент заказа')
     def click_order_item_button(self):
         self.click(self.ORDER_ITEM)
         self.wait_for_visibility_of_element(self.ORDER_MODAL_WINDOW)
 
+    @allure.step('Получаем подробную информацию об элементе')
     def get_order_item_details(self):
         return self.get_element(self.ORDER_MODAL_WINDOW)
 
+    @allure.step('Ожидаем появления закзаов в работе')
     def wait_for_visibility_of_orders_in_progress(self):
         self.wait_for_visibility_of_element(self.ORDERS_IN_PROGRESS)
 
+    @allure.step('Получаем заказы в работе')
     def get_order_in_progress(self):
         return self.get_element(self.ORDERS_IN_PROGRESS)
 
+    @allure.step('Нажимамем на кнопку открытия профиля')
     def click_profile_button(self):
         self.click(self.PROFILE_BUTTON)
         self.wait_for_visibility_of_element(self.PROFILE_TITLE)
 
+    @allure.step('Нажимаем на кнопку открытия истории заказов')
     def click_order_history_button(self):
         self.click(self.ORDER_HISTORY_BUTTON)
         self.wait_for_visibility_of_element(self.ORDER_HISTORY_LIST)
 
+    @allure.step('Получаем историю заказов')
     def get_orders_history_list(self):
         return self.get_elements(self.ORDER_HISTORY_LIST_ITEM)
 
+    @allure.step('Получаем список заказов')
     def get_orders_feed_list(self):
         self.wait_for_visibility_of_element(self.ORDER_FEED_LIST)
         return self.get_elements(self.ORDER_FEED_LIST_ITEM)
+
+    @allure.step('Нажимаем кнопку входа в аккаунт')
+    def click_login_in_account_button(self):
+        self.get_element(self.LOGIN_IN_ACCOUNT_BUTTON).click()
+        self.wait_for_visibility_of_element(self.LOGIN_H2)
+
+    @allure.step('Вводим пароль')
+    def set_password(self, password):
+        self.get_element(self.PASSWORD_INPUT).send_keys(password)
+
+    @allure.step('Вводим почтовый адрес')
+    def set_email(self, email):
+        self.get_element(self.EMAIL_INPUT).send_keys(email)
+
+    @allure.step('Нажимаем кнопку авторизации')
+    def click_login_button(self):
+        self.get_element(self.LOGIN_BUTTON).click()
+
+    @allure.step('Авторизация пользователя')
+    def login_from_main_page(self):
+        self.click_login_in_account_button()
+        self.set_email(Data.TEST_EMAIL)
+        self.set_password(Data.TEST_PASSWORD)
+        self.click_login_button()
+        self.wait_for_visibility_of_element(self.CONSTRUCTOR_TITLE)
