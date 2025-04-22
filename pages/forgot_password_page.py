@@ -27,18 +27,21 @@ class ForgotPasswordPage(BasePage):
         self.get_element(self.PASSWORD_INPUT).send_keys(password)
 
     def click_forgot_password_button(self):
-        self.get_element(self.FORGOT_PASSWORD_BUTTON).click()
+        self.click(self.FORGOT_PASSWORD_BUTTON)
         self.wait_for_visibility_of_element(self.PASSWORD_RECOVERY_H2)
 
     def click_password_recovery_button(self):
-        self.get_element(self.RECOVERY_BUTTON).click()
+        self.click(self.RECOVERY_BUTTON)
         self.wait_for_visibility_of_element(self.PASSWORD_INPUT)
 
     def click_hide_password_button(self):
-        self.get_element(self.HIDE_PASSWORD_BUTTON).click()
+        self.click(self.HIDE_PASSWORD_BUTTON)
 
     def get_active_input(self):
         return self.get_element(self.INPUT_STATUS_ACTIVE)
 
     def get_save_button(self):
         return self.get_element(self.SAVE_BUTTON)
+
+    def wait_for_visibility_of_login_title(self):
+        self.wait_for_visibility_of_element(self.LOGIN_H2)

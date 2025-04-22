@@ -8,7 +8,8 @@ class TestForgotPassword:
     def test_password_recovery(self, driver_main_page):
         page = ForgotPasswordPage(driver_main_page)
         page.open_page(Urls.LOGIN_URL)
-        page.wait_for_visibility_of_element(page.LOGIN_H2)
+        page.wait_for_visibility_of_login_title()
+
         page.click_forgot_password_button()
         page.set_email(Data.TEST_EMAIL)
         page.click_password_recovery_button()

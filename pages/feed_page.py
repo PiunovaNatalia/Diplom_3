@@ -61,3 +61,37 @@ class FeedPage(BasePage):
         create_order_button = self.get_element(self.FEED_BUTTON)
         create_order_button.click()
         self.wait_for_visibility_of_element(self.ORDER_FEED_TITLE)
+
+    def click_order_feed_button(self):
+        self.click(self.FEED_BUTTON)
+
+    def wait_for_visibility_of_order_feed_title(self):
+        self.wait_for_visibility_of_element(self.ORDER_FEED_TITLE)
+
+    def click_order_item_button(self):
+        self.click(self.ORDER_ITEM)
+        self.wait_for_visibility_of_element(self.ORDER_MODAL_WINDOW)
+
+    def get_order_item_details(self):
+        return self.get_element(self.ORDER_MODAL_WINDOW)
+
+    def wait_for_visibility_of_orders_in_progress(self):
+        self.wait_for_visibility_of_element(self.ORDERS_IN_PROGRESS)
+
+    def get_order_in_progress(self):
+        return self.get_element(self.ORDERS_IN_PROGRESS)
+
+    def click_profile_button(self):
+        self.click(self.PROFILE_BUTTON)
+        self.wait_for_visibility_of_element(self.PROFILE_TITLE)
+
+    def click_order_history_button(self):
+        self.click(self.ORDER_HISTORY_BUTTON)
+        self.wait_for_visibility_of_element(self.ORDER_HISTORY_LIST)
+
+    def get_orders_history_list(self):
+        return self.get_elements(self.ORDER_HISTORY_LIST_ITEM)
+
+    def get_orders_feed_list(self):
+        self.wait_for_visibility_of_element(self.ORDER_FEED_LIST)
+        return self.get_elements(self.ORDER_FEED_LIST_ITEM)
