@@ -7,56 +7,30 @@ class TestProfile:
     @allure.title("Тестирование открытия профиля пользователя после аторизации")
     def test_profile_open(self, driver_main_page):
         page = ProfilePage(driver_main_page)
+        page.click_login_in_account_button()
 
-        button = page.get_element(page.LOGIN_IN_ACCOUNT_BUTTON)
-        button.click()
+        page.set_email(Data.TEST_EMAIL)
+        page.set_password(Data.TEST_PASSWORD)
+        page.click_login_button()
 
-        page.wait_for_visibility_of_element(page.LOGIN_H2)
-
-        email_input = page.get_element(page.EMAIL_INPUT)
-        email_input.send_keys(Data.TEST_EMAIL)
-
-        password_input = page.get_element(page.PASSWORD_INPUT)
-        password_input.send_keys(Data.TEST_PASSWORD)
-
-        login_button = page.get_element(page.LOGIN_BUTTON)
-        login_button.click()
-
-        page.wait_for_visibility_of_element(page.CONSTRUCTOR_TITLE)
-
-        login_button = page.get_element(page.PROFILE_BUTTON)
-        login_button.click()
-
-        page.wait_for_visibility_of_element(page.PROFILE_TITLE)
-        profile_title = page.get_element(page.PROFILE_TITLE)
+        page.wait_for_visibility_of_title()
+        page.click_profile_button()
+        profile_title = page.get_profile_title()
 
         assert profile_title.is_displayed()
 
     @allure.title("Тестирование открытия страницы истории заказов в профиле")
     def test_profile_order_history_open(self, driver_main_page):
         page = ProfilePage(driver_main_page)
+        page.click_login_in_account_button()
 
-        button = page.get_element(page.LOGIN_IN_ACCOUNT_BUTTON)
-        button.click()
+        page.set_email(Data.TEST_EMAIL)
+        page.set_password(Data.TEST_PASSWORD)
+        page.click_login_button()
 
-        page.wait_for_visibility_of_element(page.LOGIN_H2)
+        page.wait_for_visibility_of_title()
+        page.click_profile_button()
 
-        email_input = page.get_element(page.EMAIL_INPUT)
-        email_input.send_keys(Data.TEST_EMAIL)
-
-        password_input = page.get_element(page.PASSWORD_INPUT)
-        password_input.send_keys(Data.TEST_PASSWORD)
-
-        login_button = page.get_element(page.LOGIN_BUTTON)
-        login_button.click()
-
-        page.wait_for_visibility_of_element(page.CONSTRUCTOR_TITLE)
-
-        login_button = page.get_element(page.PROFILE_BUTTON)
-        login_button.click()
-
-        page.wait_for_visibility_of_element(page.PROFILE_TITLE)
-        order_history_button = page.get_element(page.ORDER_HISTORY_BUTTON)
-        order_history_button.click()
+        page.click_order_history_button()
 
         assert page.get_current_url() == Urls.ORDER_HISTORY_URL

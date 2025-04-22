@@ -19,9 +19,26 @@ class ForgotPasswordPage(BasePage):
     EMAIL_INPUT = (By.XPATH, ".//input[@name='name']")  # Поле для ввода имейла
 
     @allure.step('Вводим адрес')
-    def set_address(self, address):
+    def set_email(self, address):
         self.get_element(self.EMAIL_INPUT).send_keys(address)
 
     @allure.step('Вводим пароль')
     def set_password(self, password):
         self.get_element(self.PASSWORD_INPUT).send_keys(password)
+
+    def click_forgot_password_button(self):
+        self.get_element(self.FORGOT_PASSWORD_BUTTON).click()
+        self.wait_for_visibility_of_element(self.PASSWORD_RECOVERY_H2)
+
+    def click_password_recovery_button(self):
+        self.get_element(self.RECOVERY_BUTTON).click()
+        self.wait_for_visibility_of_element(self.PASSWORD_INPUT)
+
+    def click_hide_password_button(self):
+        self.get_element(self.HIDE_PASSWORD_BUTTON).click()
+
+    def get_active_input(self):
+        return self.get_element(self.INPUT_STATUS_ACTIVE)
+
+    def get_save_button(self):
+        return self.get_element(self.SAVE_BUTTON)
